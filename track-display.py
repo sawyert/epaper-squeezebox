@@ -73,7 +73,7 @@ def fetchTrackData():
     return returnDict
 
 def updateDisplay(data):
-    print("Updating display...")
+    print("*")
     sys.path.append('lib')
     from waveshare_epd import epd5in83_V2
 
@@ -111,5 +111,5 @@ while(True):
     if trackData != oldTrackData:
         oldTrackData = trackData
         updateDisplay(trackData)
-    time.sleep(20)
+    time.sleep(5)
     print(".")
