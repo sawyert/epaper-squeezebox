@@ -65,13 +65,13 @@ draw.text((10, 0), previousArtist, font = font30, fill = 0)
 draw.text((10, 30), previousSong, font = font40, fill = 0)
 draw.text((10, 70), previousAlbum, font = font30, fill = 0)
 
-draw.text((10, 100), currentArtist, font = font40, fill = 0)
-draw.text((10, 140), currentSong, font = font60, fill = 0)
-draw.text((10, 200), currentAlbum, font = font40, fill = 0)
+draw.text((10, 120), currentArtist, font = font40, fill = 0)
+draw.text((10, 160), currentSong, font = font60, fill = 0)
+draw.text((10, 220), currentAlbum, font = font40, fill = 0)
 
-draw.text((10, 250), nextArtist, font = font30, fill = 0)
-draw.text((10, 280), nextSong, font = font40, fill = 0)
-draw.text((10, 320), nextAlbum, font = font30, fill = 0)
+draw.text((10, 280), nextArtist, font = font30, fill = 0)
+draw.text((10, 310), nextSong, font = font40, fill = 0)
+draw.text((10, 350), nextAlbum, font = font30, fill = 0)
 
 epd.display(epd.getbuffer(Himage))
 
