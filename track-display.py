@@ -69,7 +69,7 @@ draw.text((10, 160), currentArtist, font = font40, fill = 0)
 draw.text((10, 200), currentSong, font = font60, fill = 0)
 draw.text((10, 260), currentAlbum, font = font40, fill = 0)
 
-draw.text((10, 380), nextArtist, font = font30, fill = 0)
+draw.text((10, 360), nextArtist, font = font30, fill = 0)
 draw.text((10, 390), nextSong, font = font40, fill = 0)
 draw.text((10, 430), nextAlbum, font = font30, fill = 0)
 
