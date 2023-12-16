@@ -83,7 +83,7 @@ def updateDisplay(data, epd):
 
     draw.text((0, 160), data['current']['artist'], font = font40, fill = 0)
     draw.text((0, 200), data['current']['song'], font = font60, fill = 0)
-    draw.text((0, 260), data['current']['album'], font = font40, fill = 0)
+    draw.text((0, 270), data['current']['album'], font = font40, fill = 0)
 
     draw.text((0, 360), data['next']['artist'], font = font30, fill = 0)
     draw.text((0, 390), data['next']['song'], font = font40, fill = 0)
