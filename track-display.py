@@ -47,10 +47,7 @@ print ("%s %s %s" % (song, artist, album))
 print ("%s %s %s" % (nextSong, nextArtist, nextAlbum))
 
 
-
-libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
-if os.path.exists(libdir):
-    sys.path.append(libdir)
+sys.path.append('lib')
 from waveshare_epd import epd5in83_V2
 
 epd = epd5in83_V2.EPD()
