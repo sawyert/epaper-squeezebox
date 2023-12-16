@@ -53,16 +53,16 @@ from waveshare_epd import epd5in83_V2
 epd = epd5in83_V2.EPD()
 epd.init()
 
-FONT_FILE = "coolvetica condensed rg.otf"
+FONT_FILE = "coolvetica rg.otf"
 
-font50 = ImageFont.truetype(FONT_FILE, 50)
+font60 = ImageFont.truetype(FONT_FILE, 60)
 font40 = ImageFont.truetype(FONT_FILE, 40)
 
 Himage = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
 draw = ImageDraw.Draw(Himage)
 
 draw.text((10, 0), currentArtist, font = font40, fill = 0)
-draw.text((10, 80), currentSong, font = font50, fill = 0)
+draw.text((10, 80), currentSong, font = font60, fill = 0)
 draw.text((10, 180), currentAlbum, font = font40, fill = 0)
 epd.display(epd.getbuffer(Himage))
 
