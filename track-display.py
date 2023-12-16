@@ -1,6 +1,7 @@
 # show previous, current, next track on epaper from a raspberry pi zero
 
 import urllib.request
+import os
 
 from PIL import Image, ImageDraw, ImageFont
 from bs4 import BeautifulSoup
