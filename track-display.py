@@ -4,7 +4,6 @@ import urllib.request
 
 from PIL import Image, ImageDraw, ImageFont
 from bs4 import BeautifulSoup
-from waveshare_epd import epd5in83_V2
 
 SQUEEZE_URL = 'http://wellhead:9002/status.html?player=02:42:47:ab:fd:11' # Master in kitchen
 LIST_INDEX_ID_PREFIX = 'playlistSong'
@@ -45,6 +44,13 @@ nextAlbum = nextSongDetails[2].text.strip()
 print ("%s %s %s" % (previousSong, previousArtist, previousAlbum))
 print ("%s %s %s" % (song, artist, album))
 print ("%s %s %s" % (nextSong, nextArtist, nextAlbum))
+
+
+
+libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
+if os.path.exists(libdir):
+    sys.path.append(libdir)
+from waveshare_epd import epd5in83_V2
 
 epd = epd5in83_V2.EPD()
 epd.init()
