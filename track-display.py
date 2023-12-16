@@ -53,7 +53,7 @@ from waveshare_epd import epd5in83_V2
 epd = epd5in83_V2.EPD()
 epd.init()
 
-FONT_FILE = "coolvetica rg.otf"
+FONT_FILE = "coolvetica condensed rg.otf"
 
 font50 = ImageFont.truetype(FONT_FILE, 50)
 font40 = ImageFont.truetype(FONT_FILE, 40)
