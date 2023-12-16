@@ -54,16 +54,25 @@ epd = epd5in83_V2.EPD()
 epd.init()
 
 FONT_FILE = "coolvetica rg.otf"
-
-font60 = ImageFont.truetype(FONT_FILE, 60)
+font30 = ImageFont.truetype(FONT_FILE, 30)
 font40 = ImageFont.truetype(FONT_FILE, 40)
+font60 = ImageFont.truetype(FONT_FILE, 60)
 
 Himage = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
 draw = ImageDraw.Draw(Himage)
 
-draw.text((10, 0), currentArtist, font = font40, fill = 0)
-draw.text((10, 80), currentSong, font = font60, fill = 0)
-draw.text((10, 180), currentAlbum, font = font40, fill = 0)
+draw.text((10, 0), previousArtist, font = font30, fill = 0)
+draw.text((10, 30), previousSong, font = font40, fill = 0)
+draw.text((10, 70), previousAlbum, font = font30, fill = 0)
+
+draw.text((10, 100), currentArtist, font = font40, fill = 0)
+draw.text((10, 140), currentSong, font = font60, fill = 0)
+draw.text((10, 200), currentAlbum, font = font40, fill = 0)
+
+draw.text((10, 250), nextArtist, font = font30, fill = 0)
+draw.text((10, 280), nextSong, font = font40, fill = 0)
+draw.text((10, 320), nextAlbum, font = font30, fill = 0)
+
 epd.display(epd.getbuffer(Himage))
 
 epd5in83_V2.epdconfig.module_exit()
