@@ -28,9 +28,9 @@ previousTrack = soup.find("div", id='%s%d' % (LIST_INDEX_ID_PREFIX, previousTrac
 nextTrack = soup.find("div", id='%s%d' % (LIST_INDEX_ID_PREFIX, nextTrackNumber))
 
 songDetails = currentTrack.find_all("div", class_=PLAYLIST_ITEM_DETAILS_CLASS)
-song = songDetails[0].text.strip()
-artist = songDetails[1].text.strip()
-album = songDetails[2].text.strip()
+currentSong = songDetails[0].text.strip()
+currentArtist = songDetails[1].text.strip()
+currentAlbum = songDetails[2].text.strip()
 
 previousSongDetails = previousTrack.find_all("div", class_=PLAYLIST_ITEM_DETAILS_CLASS)
 previousSong = previousSongDetails[0].text.strip()
@@ -43,7 +43,7 @@ nextArtist = nextSongDetails[1].text.strip()
 nextAlbum = nextSongDetails[2].text.strip()
 
 print ("%s %s %s" % (previousSong, previousArtist, previousAlbum))
-print ("%s %s %s" % (song, artist, album))
+print ("%s %s %s" % (currentSong, currentArtist, currentAlbum))
 print ("%s %s %s" % (nextSong, nextArtist, nextAlbum))
 
 
@@ -55,15 +55,15 @@ epd.init()
 
 FONT_FILE = "coolvetica rg.otf"
 
-font24 = ImageFont.truetype(FONT_FILE, 24)
-font18 = ImageFont.truetype(FONT_FILE, 18)
+font100 = ImageFont.truetype(FONT_FILE, 100)
+font80 = ImageFont.truetype(FONT_FILE, 80)
 
 Himage = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
 draw = ImageDraw.Draw(Himage)
 
-draw.text((10, 0), artist, font = font18, fill = 0)
-draw.text((10, 20), song, font = font24, fill = 0)
-draw.text((10, 30), album, font = font18, fill = 0)
+draw.text((10, 0), currentArtist, font = font80, fill = 0)
+draw.text((10, 80), currentSong, font = font100, fill = 0)
+draw.text((10, 180), currentAlbum, font = font80, fill = 0)
 epd.display(epd.getbuffer(Himage))
 
 epd5in83_V2.epdconfig.module_exit()
