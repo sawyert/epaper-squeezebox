@@ -42,10 +42,6 @@ def fetchTrackData():
     nextArtist = nextSongDetails[1].text.strip()
     nextAlbum = nextSongDetails[2].text.strip()
 
-    print ("%s %s %s" % (previousSong, previousArtist, previousAlbum))
-    print ("%s %s %s" % (currentSong, currentArtist, currentAlbum))
-    print ("%s %s %s" % (nextSong, nextArtist, nextAlbum))
-
     previousTrackDict = {
         "song": previousSong,
         "artist": previousArtist,
@@ -72,14 +68,8 @@ def fetchTrackData():
     
     return returnDict
 
-def updateDisplay(data):
+def updateDisplay(data, epd):
     print("*")
-    sys.path.append('lib')
-    from waveshare_epd import epd5in83_V2
-
-    epd = epd5in83_V2.EPD()
-    epd.init()
-
     FONT_FILE = "coolvetica rg.otf"
     font30 = ImageFont.truetype(FONT_FILE, 30)
     font40 = ImageFont.truetype(FONT_FILE, 40)
@@ -102,14 +92,20 @@ def updateDisplay(data):
 
     epd.display(epd.getbuffer(Himage))
 
-    epd5in83_V2.epdconfig.module_exit()
 
+sys.path.append('lib')
+from waveshare_epd import epd5in83_V2
+
+epd = epd5in83_V2.EPD()
+epd.init()
 
 oldTrackData = None
 while(True):
     trackData = fetchTrackData()
     if trackData != oldTrackData:
         oldTrackData = trackData
-        updateDisplay(trackData)
+        updateDisplay(trackData, epd)
     time.sleep(5)
     print(".")
+
+epd5in83_V2.epdconfig.module_exit()    
