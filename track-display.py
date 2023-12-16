@@ -74,5 +74,6 @@ draw.text((10, 390), nextSong, font = font40, fill = 0)
 draw.text((10, 430), nextAlbum, font = font30, fill = 0)
 
 epd.display(epd.getbuffer(Himage))
+epd.sleep()
 
 epd5in83_V2.epdconfig.module_exit()
