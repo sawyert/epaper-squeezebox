@@ -69,7 +69,6 @@ def fetchTrackData():
     return returnDict
 
 def updateDisplay(data, epd):
-    print("*")
     FONT_FILE = "coolvetica rg.otf"
     font30 = ImageFont.truetype(FONT_FILE, 30)
     font40 = ImageFont.truetype(FONT_FILE, 40)
@@ -105,7 +104,6 @@ while(True):
     if trackData != oldTrackData:
         oldTrackData = trackData
         updateDisplay(trackData, epd)
-    time.sleep(5)
-    print(".")
+    time.sleep(20)
 
-epd5in83_V2.epdconfig.module_exit()    
+# epd5in83_V2.epdconfig.module_exit()    
