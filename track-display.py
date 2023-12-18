@@ -77,17 +77,17 @@ def updateDisplay(data, epd):
     Himage = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
     draw = ImageDraw.Draw(Himage)
 
-    draw.text((0, 0), data['previous']['artist'], font = font30, fill = 0)
-    draw.text((0, 30), data['previous']['song'], font = font40, fill = 0)
-    draw.text((0, 70), data['previous']['album'], font = font30, fill = 0)
+    draw.text((10, 20), data['previous']['artist'], font = font30, fill = 0)
+    draw.text((10, 50), data['previous']['song'], font = font40, fill = 0)
+    draw.text((10, 90), data['previous']['album'], font = font30, fill = 0)
 
-    draw.text((0, 160), data['current']['artist'], font = font40, fill = 0)
-    draw.text((0, 200), data['current']['song'], font = font60, fill = 0)
-    draw.text((0, 270), data['current']['album'], font = font40, fill = 0)
+    draw.text((10, 170), data['current']['artist'], font = font40, fill = 0)
+    draw.text((10, 210), data['current']['song'], font = font60, fill = 0)
+    draw.text((10, 280), data['current']['album'], font = font40, fill = 0)
 
-    draw.text((0, 360), data['next']['artist'], font = font30, fill = 0)
-    draw.text((0, 390), data['next']['song'], font = font40, fill = 0)
-    draw.text((0, 430), data['next']['album'], font = font30, fill = 0)
+    draw.text((10, 360), data['next']['artist'], font = font30, fill = 0)
+    draw.text((10, 390), data['next']['song'], font = font40, fill = 0)
+    draw.text((10, 430), data['next']['album'], font = font30, fill = 0)
 
     epd.display(epd.getbuffer(Himage))
 
