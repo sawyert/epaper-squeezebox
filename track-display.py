@@ -7,7 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 from bs4 import BeautifulSoup
 
 def fetchTrackData():
-    SQUEEZE_URL = 'http://wellhead:9002/status.html?player=02:42:47:ab:fd:11' # Master in kitchen
+    SQUEEZE_URL = 'http://wellhead:9002/status.html?player=02:42:0a:dc:e6:6f' # Master in kitchen
     LIST_INDEX_ID_PREFIX = 'playlistSong'
     PLAYLIST_ITEM_DETAILS_CLASS = 'playlistSongDetail'
 
