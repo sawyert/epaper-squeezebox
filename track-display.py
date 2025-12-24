@@ -1,64 +1,43 @@
 # show previous, current, next track on epaper from a raspberry pi zero
 
 import urllib.request
+import json
 import os, sys, time
 
 from PIL import Image, ImageDraw, ImageFont
-from bs4 import BeautifulSoup
 
 def fetchTrackData():
-    SQUEEZE_URL = 'http://wellhead:9002/status.html?player=02:42:0a:dc:e6:6f' # Master in kitchen
-    LIST_INDEX_ID_PREFIX = 'playlistSong'
-    PLAYLIST_ITEM_DETAILS_CLASS = 'playlistSongDetail'
-
-    fp = urllib.request.urlopen(SQUEEZE_URL)
-    pageBytes = fp.read()
-
-    squeezeHtml = pageBytes.decode("utf8")
-    fp.close()
-
-    soup = BeautifulSoup(squeezeHtml, 'html.parser')
-    currentTrack = soup.find("div", class_="currentSong")
-
-    currentTrackNumber = int(currentTrack.get('id')[len(LIST_INDEX_ID_PREFIX):])
-    previousTrackNumber = currentTrackNumber - 1
-    nextTrackNumber = currentTrackNumber + 1
-
-    previousTrack = soup.find("div", id='%s%d' % (LIST_INDEX_ID_PREFIX, previousTrackNumber))
-    nextTrack = soup.find("div", id='%s%d' % (LIST_INDEX_ID_PREFIX, nextTrackNumber))
-
-    songDetails = currentTrack.find_all("div", class_=PLAYLIST_ITEM_DETAILS_CLASS)
-    currentSong = songDetails[0].text.strip()
-    currentArtist = songDetails[1].text.strip()
-    currentAlbum = songDetails[2].text.strip()
-
-    previousSongDetails = previousTrack.find_all("div", class_=PLAYLIST_ITEM_DETAILS_CLASS)
-    previousSong = previousSongDetails[0].text.strip()
-    previousArtist = previousSongDetails[1].text.strip()
-    previousAlbum = previousSongDetails[2].text.strip()
-
-    nextSongDetails = nextTrack.find_all("div", class_=PLAYLIST_ITEM_DETAILS_CLASS)
-    nextSong = nextSongDetails[0].text.strip()
-    nextArtist = nextSongDetails[1].text.strip()
-    nextAlbum = nextSongDetails[2].text.strip()
-
-    previousTrackDict = {
-        "song": previousSong,
-        "artist": previousArtist,
-        "album": previousAlbum
+    SQUEEZE_URL = 'http://headwell:9000/jsonrpc.js'
+    RPC_BODY = {
+        "id": 1, 
+        "method": "slim.request", 
+        "params": ["02:42:0a:dc:e6:6f", ["status", "0", "20", "tags:uBqal"]]
     }
 
-    currentTrackDict = {
-        "song": currentSong,
-        "artist": currentArtist,
-        "album": currentAlbum
-    }
+    req = urllib.request.Request(SQUEEZE_URL, data=json.dumps(RPC_BODY).encode('utf-8'), method='POST')
+    req.add_header('Content-Type', 'application/json')
+    
+    with urllib.request.urlopen(req) as fp:
+        pageBytes = fp.read()
+    
+    squeezeData = json.loads(pageBytes.decode("utf8"))
+    result = squeezeData.get('result', {})
+    playlist_loop = result.get('playlist_loop', [])
+    cur_index = result.get('playlist_cur_index')
 
-    nextTrackDict = {
-        "song": nextSong,
-        "artist": nextArtist,
-        "album": nextAlbum
-    }
+    def get_track_dict(index):
+        if index is not None and 0 <= index < len(playlist_loop):
+            track = playlist_loop[index]
+            return {
+                "song": track.get('title', ''),
+                "artist": track.get('artist', ''),
+                "album": track.get('album', '')
+            }
+        return {"song": "", "artist": "", "album": ""}
+
+    previousTrackDict = get_track_dict(None if cur_index is None else cur_index - 1)
+    currentTrackDict = get_track_dict(cur_index)
+    nextTrackDict = get_track_dict(None if cur_index is None else cur_index + 1)
 
     returnDict = {
         "previous": previousTrackDict,
