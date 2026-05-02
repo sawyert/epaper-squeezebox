@@ -11,7 +11,7 @@ def fetchTrackData():
     RPC_BODY = {
         "id": 1, 
         "method": "slim.request", 
-        "params": ["02:42:0a:dc:e6:6f", ["status", "0", "20", "tags:uBqal"]]
+        "params": ["02:42:0a:dc:e6:5f", ["status", "0", "20", "tags:uBqal"]]
     }
 
     req = urllib.request.Request(SQUEEZE_URL, data=json.dumps(RPC_BODY).encode('utf-8'), method='POST')
