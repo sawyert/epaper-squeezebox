@@ -24,6 +24,8 @@ def fetchTrackData():
     result = squeezeData.get('result', {})
     playlist_loop = result.get('playlist_loop', [])
     cur_index = result.get('playlist_cur_index')
+    if cur_index is not None:
+        cur_index = int(cur_index)
 
     def get_track_dict(index):
         if index is not None and 0 <= index < len(playlist_loop):
