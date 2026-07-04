@@ -7,7 +7,7 @@ import os, sys, time
 from PIL import Image, ImageDraw, ImageFont
 
 def fetchTrackData():
-    SQUEEZE_URL = 'http://headwell:9000/jsonrpc.js'
+    SQUEEZE_URL = 'http://headwell.local:9000/jsonrpc.js'
     RPC_BODY = {
         "id": 1, 
         "method": "slim.request", 
